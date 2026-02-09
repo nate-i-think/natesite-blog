@@ -1,0 +1,7 @@
+title: Tidbits
+description: Blog of Nathan Myers
+baseurl: ""
+url: "https://tidbits.nathanmyers.co"
+
+# Build settings
+markdown: kramdown
