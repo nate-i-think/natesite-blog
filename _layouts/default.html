@@ -6,7 +6,7 @@
   <title>{{ page.title | default: site.title }}</title>
   <script>
     (function() {
-      if (new URLSearchParams(window.location.search).get('from') !== 'crt') return;
+      if (window.location.hash !== '#from-crt') return;
       var overlay = document.createElement('div');
       overlay.id = 'crt-fade-overlay';
       overlay.setAttribute('style',
@@ -15,9 +15,7 @@
         'opacity:1;transition:opacity 1.6s linear;pointer-events:none;'
       );
       document.documentElement.appendChild(overlay);
-      var url = new URL(window.location);
-      url.searchParams.delete('from');
-      history.replaceState(null, '', url.pathname + url.search + url.hash);
+      history.replaceState(null, '', window.location.pathname + window.location.search);
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
         overlay.remove();
         return;
