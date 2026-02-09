@@ -9,17 +9,15 @@
 <body>
   <div class="paper">
     <div class="post-header">
-      <div class="post-title-row">
-        <h1>{{ page.title }}</h1>
-        <span class="header-actions">
-          <a href="#" class="back-link" id="jazz-btn">[jazz]</a>
-          <a href="#" class="back-link" id="justify-toggle">[unjustify]</a>
-          <a href="{{ '/' | relative_url }}" class="back-link">[back]</a>
-        </span>
-      </div>
+      <h1>{{ page.title }}</h1>
       <p class="post-date">{{ page.date | date: "%B %-d, %Y" }}</p>
+      <span class="header-actions">
+        <a href="#" class="back-link" id="jazz-btn">[jazz]</a>
+        <a href="#" class="back-link" id="justify-toggle">[unjustify]</a>
+        <a href="{{ '/' | relative_url }}" class="back-link">[back]</a>
+      </span>
     </div>
-    <div class="post-content justified">
+    <div class="post-content">
       {{ content }}
     </div>
   </div>
@@ -29,6 +27,18 @@
   <script>
     var toggle = document.getElementById('justify-toggle');
     var content = document.querySelector('.post-content');
+    var isMobile = window.matchMedia('(max-width: 700px)');
+    function applyJustify() {
+      if (isMobile.matches) {
+        content.classList.remove('justified');
+        toggle.textContent = '[justify]';
+      } else {
+        content.classList.add('justified');
+        toggle.textContent = '[unjustify]';
+      }
+    }
+    applyJustify();
+    isMobile.addEventListener('change', applyJustify);
     toggle.addEventListener('click', function(e) {
       e.preventDefault();
       content.classList.toggle('justified');

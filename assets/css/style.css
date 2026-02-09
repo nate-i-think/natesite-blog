@@ -145,15 +145,16 @@ em {
 
 
 /* Post content styles. */
-.post-title-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
+.post-header {
+  position: relative;
 }
 
 .header-actions {
   display: flex;
   gap: 0.75rem;
+  position: absolute;
+  top: 0.25rem;
+  right: 0;
 }
 
 .back-link {
@@ -230,5 +231,20 @@ em {
 
   body {
     padding: 1rem;
+  }
+
+  .site-footer {
+    position: static;
+    margin-top: 1rem;
+  }
+
+  .post-header {
+    text-align: center;
+  }
+
+  .header-actions {
+    position: static;
+    margin-top: 0.5rem;
+    justify-content: center;
   }
 }
