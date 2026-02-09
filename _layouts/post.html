@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ page.title }} - {{ site.title }}</title>
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+</head>
+<body>
+  <div class="paper">
+    <div class="post-header">
+      <div class="post-title-row">
+        <h1>{{ page.title }}</h1>
+        <span class="header-actions">
+          <a href="#" class="back-link" id="jazz-btn">[jazz]</a>
+          <a href="#" class="back-link" id="justify-toggle">[unjustify]</a>
+          <a href="{{ '/' | relative_url }}" class="back-link">[back]</a>
+        </span>
+      </div>
+      <p class="post-date">{{ page.date | date: "%B %-d, %Y" }}</p>
+    </div>
+    <div class="post-content justified">
+      {{ content }}
+    </div>
+  </div>
+  <footer class="site-footer">
+    &copy; {{ site.time | date: "%Y" }} Nathan Myers
+  </footer>
+  <script>
+    var toggle = document.getElementById('justify-toggle');
+    var content = document.querySelector('.post-content');
+    toggle.addEventListener('click', function(e) {
+      e.preventDefault();
+      content.classList.toggle('justified');
+      toggle.textContent = content.classList.contains('justified') ? '[unjustify]' : '[justify]';
+    });
+
+    var jazzLinks = [{% for track in site.data.jazz_list %}"{{ track['YTM Link'] }}"{% unless forloop.last %},{% endunless %}{% endfor %}];
+    document.getElementById('jazz-btn').addEventListener('click', function(e) {
+      e.preventDefault();
+      window.open(jazzLinks[Math.floor(Math.random() * jazzLinks.length)], '_blank');
+    });
+  </script>
+</body>
+</html>
